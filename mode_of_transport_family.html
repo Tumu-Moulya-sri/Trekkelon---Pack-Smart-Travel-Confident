@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trekkelon</title>
+    <link rel="stylesheet" href="mode_of_transport_page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 id="main_heading">Choose your mode of transport</h1>
+
+    <div class="boxes">
+        <div class="box" data-transport="bus">Bus</div>
+        <div class="box" data-transport="train">Train</div>
+        <div class="box" data-transport="flight">Flight</div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const travelerType = urlParams.get('type'); // "family_traveler"
+
+        document.querySelectorAll('.box').forEach(box => {
+            box.addEventListener('click', () => {
+                const transport = box.getAttribute('data-transport');
+                const link = `${travelerType}_${transport}.html`;
+                window.location.href = link;
+            });
+        });
+    </script>
+</body>
+</html>

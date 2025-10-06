@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trekkelon - Family Traveler (Flight)</title>
+    <link rel="stylesheet" href="family_traveler.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        Family Traveler - Flight
+    </div>
+
+    <h1 id="tag">Here's a list of items which are essential for you!</h1>
+
+    <div class="container">
+
+        <div class="items_list">
+            <h1>Essential Items</h1>
+            <form>
+                <label><input type="checkbox"> Flight tickets / Boarding passes</label>
+                <label><input type="checkbox"> Passports / ID proofs</label>
+                <label><input type="checkbox"> Wallet (cash + cards)</label>
+                <label><input type="checkbox"> Mobile phones + Chargers</label>
+                <label><input type="checkbox"> Travel itinerary & hotel bookings</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Luggage & Documents</h1>
+            <form>
+                <label><input type="checkbox"> Cabin bag + check-in luggage</label>
+                <label><input type="checkbox"> Baggage tags & labels</label>
+                <label><input type="checkbox"> Travel insurance documents</label>
+                <label><input type="checkbox"> Emergency contact info</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Food & Hydration</h1>
+            <form>
+                <label><input type="checkbox"> Empty water bottle (refill after security)</label>
+                <label><input type="checkbox"> Light snacks (energy bars, biscuits)</label>
+                <label><input type="checkbox"> Baby food (if required)</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Health & Hygiene</h1>
+            <form>
+                <label><input type="checkbox"> Hand sanitizer & wipes</label>
+                <label><input type="checkbox"> Face masks</label>
+                <label><input type="checkbox"> Medicines (kids + elders)</label>
+                <label><input type="checkbox"> Travel-size toiletries (100ml limit)</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Entertainment</h1>
+            <form>
+                <label><input type="checkbox"> Books, magazines</label>
+                <label><input type="checkbox"> Downloaded movies/music</label>
+                <label><input type="checkbox"> Toys/coloring books for kids</label>
+                <label><input type="checkbox"> Headphones</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Comfort Items</h1>
+            <form>
+                <label><input type="checkbox"> Travel pillows</label>
+                <label><input type="checkbox"> Light jacket/blanket (flights get cold)</label>
+                <label><input type="checkbox"> Eye mask & earplugs</label>
+                <label><input type="checkbox"> Comfortable shoes</label>
+            </form>
+        </div>
+
+        <div id="tips">
+            <h1>Pro Tips!!</h1><br>
+            <p>Arrive at the airport at least 2–3 hours before departure.</p><br>
+            <p>Pack essentials in cabin luggage, not in check-in bags.</p><br>
+            <p>Keep kids engaged with small toys or activities.</p><br>
+            <p>Carry an empty bottle to refill after security check.</p><br>
+            <p>Check airline baggage rules in advance.</p><br>
+        </div>
+    </div>
+
+    <div class="items_list">
+            <h1>Your Custom List</h1>
+            <form id="customForm">
+                <input type="text" id="customInput" placeholder="Add your own item" required>
+                <button type="submit">Add Item</button>
+            </form>
+            <ul id="customList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("customForm");
+        const input = document.getElementById("customInput");
+        const list = document.getElementById("customList");
+
+        window.onload = function() {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved.forEach(item => addItem(item));
+        };
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const value = input.value.trim();
+            if (value !== "") {
+                addItem(value);
+                saveItem(value);
+                input.value = "";
+            }
+        });
+
+        function addItem(text) {
+            let li = document.createElement("li");
+
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.name = "custom";
+            checkbox.value = text;
+
+            let label = document.createElement("label");
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(" " + text));
+
+            let delBtn = document.createElement("span");
+            delBtn.textContent = "X";
+            delBtn.style.cursor = "pointer";
+            delBtn.style.marginLeft = "10px";
+            delBtn.style.color = "red";
+            delBtn.addEventListener("click", function() {
+                list.removeChild(li);
+                removeItem(text);
+            });
+
+            li.appendChild(label);
+            li.appendChild(delBtn);
+
+            
+            li.style.animationDelay = "0.5s"; 
+            list.appendChild(li);
+        }
+
+        function saveItem(text) {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved.push(text);
+            localStorage.setItem("customItems", JSON.stringify(saved));
+        }
+
+        function removeItem(text) {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved = saved.filter(item => item !== text);
+            localStorage.setItem("customItems", JSON.stringify(saved));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trekkelon - Family Traveler (Train)</title>
+    <link rel="stylesheet" href="family_traveler.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        Family Traveler - Train
+    </div>
+
+    <h1 id="tag">Here's a list of items which are essential for you!</h1>
+
+    <div class="container">
+
+        <div class="items_list">
+            <h1>Essential Items</h1>
+            <form>
+                <label><input type="checkbox"> Train tickets (printed/digital)</label>
+                <label><input type="checkbox"> ID proofs of all family members</label>
+                <label><input type="checkbox"> Wallet / Cash + Cards + UPI</label>
+                <label><input type="checkbox"> Mobile phones + Charger + Power Bank</label>
+                <label><input type="checkbox"> Reservation details (PNR, seat/coach info)</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Food & Hydration</h1>
+            <form>
+                <label><input type="checkbox"> Water bottles</label>
+                <label><input type="checkbox"> Snacks (biscuits, fruits, chips)</label>
+                <label><input type="checkbox"> Dry food (avoid oily food)</label>
+                <label><input type="checkbox"> Baby food (if required)</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Hygiene & Health</h1>
+            <form>
+                <label><input type="checkbox"> Hand sanitizer, wet wipes, tissues</label>
+                <label><input type="checkbox"> Toothbrush + toothpaste</label>
+                <label><input type="checkbox"> Medicines (kids + elders)</label>
+                <label><input type="checkbox"> Extra clothes for kids</label>
+                <label><input type="checkbox"> Bedsheet / light blanket</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Safety</h1>
+            <form>
+                <label><input type="checkbox"> First aid kit</label>
+                <label><input type="checkbox"> Luggage locks</label>
+                <label><input type="checkbox"> Emergency contact info</label>
+                <label><input type="checkbox"> Torch / night lamp</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Entertainment</h1>
+            <form>
+                <label><input type="checkbox"> Books, magazines</label>
+                <label><input type="checkbox"> Movies/music/podcasts (downloaded)</label>
+                <label><input type="checkbox"> Toys/coloring books for kids</label>
+                <label><input type="checkbox"> Board games/cards</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Comfort</h1>
+            <form>
+                <label><input type="checkbox"> Travel pillows</label>
+                <label><input type="checkbox"> Shawls/jackets (for AC coaches)</label>
+                <label><input type="checkbox"> Comfortable footwear</label>
+                <label><input type="checkbox"> Eye mask & earplugs</label>
+            </form>
+        </div>
+
+        <div id="tips">
+            <h1>Pro Tips!!</h1><br>
+            <p>Book lower berths for kids and elderly.</p><br>
+            <p>Carry your own water bottles and refill at stations.</p><br>
+            <p>Keep medicines and snacks in a small handy bag.</p><br>
+            <p>Download offline entertainment before the journey.</p><br>
+            <p>Use locks for bags kept under the berth.</p><br>
+        </div>
+    </div>
+
+    <div class="items_list">
+            <h1>Your Custom List</h1>
+            <form id="customForm">
+                <input type="text" id="customInput" placeholder="Add your own item" required>
+                <button type="submit">Add Item</button>
+            </form>
+            <ul id="customList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("customForm");
+        const input = document.getElementById("customInput");
+        const list = document.getElementById("customList");
+
+        window.onload = function() {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved.forEach(item => addItem(item));
+        };
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const value = input.value.trim();
+            if (value !== "") {
+                addItem(value);
+                saveItem(value);
+                input.value = "";
+            }
+        });
+
+        function addItem(text) {
+            let li = document.createElement("li");
+
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.name = "custom";
+            checkbox.value = text;
+
+            let label = document.createElement("label");
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(" " + text));
+
+            let delBtn = document.createElement("span");
+            delBtn.textContent = "X";
+            delBtn.style.cursor = "pointer";
+            delBtn.style.marginLeft = "10px";
+            delBtn.style.color = "red";
+            delBtn.addEventListener("click", function() {
+                list.removeChild(li);
+                removeItem(text);
+            });
+
+            li.appendChild(label);
+            li.appendChild(delBtn);
+
+            
+            li.style.animationDelay = "0.5s"; 
+            list.appendChild(li);
+        }
+
+        function saveItem(text) {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved.push(text);
+            localStorage.setItem("customItems", JSON.stringify(saved));
+        }
+
+        function removeItem(text) {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved = saved.filter(item => item !== text);
+            localStorage.setItem("customItems", JSON.stringify(saved));
+        }
+    </script>
+</body>
+</html>

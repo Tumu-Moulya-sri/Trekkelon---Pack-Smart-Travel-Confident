@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+body {
+    background-color: #E5F9E0;
+    background-image: url("bg.png");
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0.7);
+    background-blend-mode: overlay;
+}
+
+.navbar {
+    height: 100px;
+    background-color: #A3F7B5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid black;
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+}
+
+#logo {
+    height: 100px;
+    width: 100px;
+    background-size: cover;
+    position: absolute;
+    left: 10px;
+}
+
+#logo img {
+    height: 100px;
+    width: 100px;
+    margin-left: 10px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#greeting-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+#greeting {
+    font-size: 2.8rem;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    color: #2B2D42;
+    opacity: 0;
+    transform: translateY(30px);
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+
+#ask {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 40px;
+    font-family: 'Montserrat', sans-serif;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeSlideIn 1s forwards 1.2s;
+}
+
+.boxes {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.box {
+    height: 150px;
+    width: 30%;
+    padding: 20px 0 15px;
+    margin-top: 50px;
+    background-color: aliceblue;
+    color: #664147;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    border: 3px solid brown;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    transition: transform 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+    opacity: 0;
+    transform: translateY(50px);
+    text-decoration: none;
+}
+
+.box:hover {
+    transform: translateY(-5px) scale(1.05);
+    background-color: #F3C623;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+@keyframes fadeSlideIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    0% { transform: translateY(50px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+.fade-slide {
+    animation: fadeSlideIn 1s forwards;
+}
+
+.slide-up {
+    animation: slideUp 0.8s forwards;
+}

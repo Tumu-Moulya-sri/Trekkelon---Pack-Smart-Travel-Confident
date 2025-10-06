@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trekkelon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-content">
+            <div id="logo">
+                <img src="logo.png" alt="Trekkelon Logo">
+            </div>
+            <div class="title">
+                <h1 id="trekkelon">Trekkelon - Pack Smart. Travel Confident.</h1>
+            </div>
+        </div>
+    </div>
+
+
+    <h1 id="ask">Who are you today?</h1>
+
+    <div class="boxes">
+        <a href="mode_of_transport_page.html?type=solo_traveler" class="box">Solo Traveler</a>
+        <a href="mode_of_transport_page.html?type=female_solo_traveler" class="box">Female Solo Traveler</a>
+        <a href="mode_of_transport_family.html?type=family_traveler" class="box">Family Traveler</a>
+        <a href="mode_of_transport_page.html?type=business_traveler" class="box">Business Traveler</a>
+        <a href="mode_of_transport_page.html?type=last_minute_traveler" class="box">Last-minute Traveler</a>
+    </div>
+
+    <script>
+        
+
+        document.querySelectorAll('.box').forEach((box, index) => {
+            box.style.animationDelay = `${0.3 + index * 0.2}s`;
+            box.classList.add('slide-up');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trekkelon - Business Traveler (Train)</title>
+    <link rel="stylesheet" href="business_traveler.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        Business Traveler - Train
+    </div>
+
+    <h1 id="tag">Here's a list of items which are essential for you!</h1>
+
+    <div class="container">
+
+        <div class="items_list">
+            <h1>Work Essentials</h1>
+            <form>
+                <label><input type="checkbox"> Laptop + Charger</label>
+                <label><input type="checkbox"> Mobile phone + Power bank</label>
+                <label><input type="checkbox"> Important documents/files</label>
+                <label><input type="checkbox"> Pen & Notebook</label>
+                <label><input type="checkbox"> USB drive / external storage</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Travel Essentials</h1>
+            <form>
+                <label><input type="checkbox"> Train tickets (PNR/printed/digital)</label>
+                <label><input type="checkbox"> ID proof</label>
+                <label><input type="checkbox"> Wallet (cash + cards)</label>
+                <label><input type="checkbox"> Headphones</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Health & Comfort</h1>
+            <form>
+                <label><input type="checkbox"> Water bottle</label>
+                <label><input type="checkbox"> Snacks / light meals</label>
+                <label><input type="checkbox"> Sanitizer & wipes</label>
+                <label><input type="checkbox"> Travel pillow / shawl</label>
+            </form>
+        </div>
+
+        <div id="tips">
+            <h1>Pro Tips!!</h1><br>
+            <p>Choose AC coaches for a more comfortable workspace.</p><br>
+            <p>Keep presentations offline in case of poor internet.</p><br>
+            <p>Carry a small extension cord if multiple devices.</p><br>
+            <p>Stay alert at stations and keep bags locked.</p><br>
+            <p>Use travel time to prepare for meetings.</p><br>
+        </div>
+    </div>
+
+    <div class="items_list">
+            <h1>Your Custom List</h1>
+            <form id="customForm">
+                <input type="text" id="customInput" placeholder="Add your own item" required>
+                <button type="submit">Add Item</button>
+            </form>
+            <ul id="customList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("customForm");
+        const input = document.getElementById("customInput");
+        const list = document.getElementById("customList");
+
+        window.onload = function() {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved.forEach(item => addItem(item));
+        };
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const value = input.value.trim();
+            if (value !== "") {
+                addItem(value);
+                saveItem(value);
+                input.value = "";
+            }
+        });
+
+        function addItem(text) {
+            let li = document.createElement("li");
+
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.name = "custom";
+            checkbox.value = text;
+
+            let label = document.createElement("label");
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(" " + text));
+
+            let delBtn = document.createElement("span");
+            delBtn.textContent = "X";
+            delBtn.style.cursor = "pointer";
+            delBtn.style.marginLeft = "10px";
+            delBtn.style.color = "red";
+            delBtn.addEventListener("click", function() {
+                list.removeChild(li);
+                removeItem(text);
+            });
+
+            li.appendChild(label);
+            li.appendChild(delBtn);
+
+            
+            li.style.animationDelay = "0.5s"; 
+            list.appendChild(li);
+        }
+
+        function saveItem(text) {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved.push(text);
+            localStorage.setItem("customItems", JSON.stringify(saved));
+        }
+
+        function removeItem(text) {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved = saved.filter(item => item !== text);
+            localStorage.setItem("customItems", JSON.stringify(saved));
+        }
+    </script>
+</body>
+</html>

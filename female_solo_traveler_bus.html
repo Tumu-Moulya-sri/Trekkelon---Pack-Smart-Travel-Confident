@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trekkelon - Female Solo Traveler</title>
+    <link rel="stylesheet" href="female_solo_traveler.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        Female Solo Traveler - Bus
+    </div>
+
+    <h1 id="tag">Here's a list of items which are essential for you!</h1>
+
+    <div class="container">
+
+        <div class="items_list">
+            <h1>Essential Items</h1>
+            <form>
+                <label><input type="checkbox" name="essentials" value="bus_ticket"> Bus ticket</label>
+                <label><input type="checkbox" name="essentials" value="id_proof"> ID proof</label>
+                <label><input type="checkbox" name="essentials" value="wallet"> Wallet / Cash + Card + UPI</label>
+                <label><input type="checkbox" name="essentials" value="mobile"> Mobile phone + Charger + Power Bank</label>
+                <label><input type="checkbox" name="essentials" value="headphones"> Headphones/Earphones</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Food & Hydration</h1>
+            <form>
+                <label><input type="checkbox" name="food" value="water"> Water Bottle</label>
+                <label><input type="checkbox" name="food" value="snacks"> Snacks / Light Meal</label>
+                <label><input type="checkbox" name="food" value="light_food">Biscuits, dry food (avoid oily food)</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Hygiene & Health</h1>
+            <form>
+                <label><input type="checkbox" name="hygiene" value="sanitizer">Hand sanitizer & Wet wipes</label>
+                <label><input type="checkbox" name="hygiene" value="toothbrush">Tooth brush + Toothpaste</label>
+                <label><input type="checkbox" name="hygiene" value="pads">Sanitary pads</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Safety</h1>
+            <form>
+                <label><input type="checkbox" name="safety" value="spray">Pepper spray</label>
+                <label><input type="checkbox" name="safety" value="app">Tracking app / share live location with family</label>
+                <label><input type="checkbox" name="safety" value="torch">Torch</label>
+                <label><input type="checkbox" name="safety" value="lock">Small lock for bags</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Entertainment & Timepass</h1>
+            <form>
+                <label><input type="checkbox" name="ent" value="book">Books/Kindle</label>
+                <label><input type="checkbox" name="ent" value="movie">Downloaded movies/music/podcasts</label>
+                <label><input type="checkbox" name="ent" value="book">Notebook & pen (for travel thoughts/memories)</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Comfort items</h1>
+            <form>
+                <label><input type="checkbox" name="comfort" value="pillow">Travel pillow / Neck pillow</label>
+                <label><input type="checkbox" name="comfort" value="blanket">Light blanket / jacket</label>
+                <label><input type="checkbox" name="comfort" value="eye">Eye mask & earplugs</label>
+                <label><input type="checkbox" name="comfort" value="light">Light jacket / shawl</label>
+            </form>
+        </div>
+
+        <div id="tips">
+            <h1>Pro Tips!!</h1>
+            <br>
+            <p>Always keep important items in a small sling bag that stays with you (never in luggage storage).</p><br>
+            <p>Prefer front or middle seats, avoid the very back at night.</p><br>
+            <p>Keep valuables under your head as pillow when sleeping.</p><br>
+        </div>
+    </div>
+
+    <section id="emergency-card">
+        <h2>🚨 Emergency Contact Card</h2>
+        <br>
+        <p>Fill in your emergency contacts below (you can print this page later).</p>
+        <br>
+
+        <form>
+            <label for="name1">Name 1:</label>
+            <input type="text" id="name1" name="name1"><br><br>
+
+            <label for="phone1">Phone 1:</label>
+            <input type="tel" id="phone1" name="phone1"><br><br>
+
+            <label for="name2">Name 2:</label>
+            <input type="text" id="name2" name="name2"><br><br>
+
+            <label for="phone2">Phone 2:</label>
+            <input type="tel" id="phone2" name="phone2"><br><br>
+
+            <label for="name3">Name 3:</label>
+            <input type="text" id="name3" name="name3"><br><br>
+
+            <label for="phone3">Phone 3:</label>
+            <input type="tel" id="phone3" name="phone3"><br><br>
+        </form>
+
+<div class="card" id="card-content">
+  <h3>📇 My Emergency Contacts</h3>
+  <p id="c1">1. __________________ : __________________</p>
+  <p id="c2">2. __________________ : __________________</p>
+  <p id="c3">3. __________________ : __________________</p>
+</div>
+
+<button type="button" onclick="printCard()">🖨️ Print Emergency Card</button>
+
+</section>
+
+<div class="items_list" id="customListContainer">
+    <h1>Your Custom List</h1>
+    <form id="customForm">
+        <input type="text" id="customInput" placeholder="Add your own item" required>
+        <button type="submit">Add Item</button>
+    </form>
+    <ul id="customList"></ul>
+</div>
+
+    <script>
+        const form = document.getElementById("customForm");
+        const input = document.getElementById("customInput");
+        const list = document.getElementById("customList");
+
+        window.onload = function() {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved.forEach(item => addItem(item));
+        };
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const value = input.value.trim();
+            if (value !== "") {
+                addItem(value);
+                saveItem(value);
+                input.value = "";
+            }
+        });
+
+        function addItem(text) {
+            let li = document.createElement("li");
+
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.name = "custom";
+            checkbox.value = text;
+
+            let label = document.createElement("label");
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(" " + text));
+
+            let delBtn = document.createElement("span");
+            delBtn.textContent = "X";
+            delBtn.style.cursor = "pointer";
+            delBtn.style.marginLeft = "10px";
+            delBtn.style.color = "red";
+            delBtn.addEventListener("click", function() {
+                list.removeChild(li);
+                removeItem(text);
+            });
+
+            li.appendChild(label);
+            li.appendChild(delBtn);
+
+            
+            li.style.animationDelay = "0.5s"; 
+            list.appendChild(li);
+        }
+
+        function saveItem(text) {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved.push(text);
+            localStorage.setItem("customItems", JSON.stringify(saved));
+        }
+
+        function removeItem(text) {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved = saved.filter(item => item !== text);
+            localStorage.setItem("customItems", JSON.stringify(saved));
+        }
+    </script>
+
+</body>
+</html>
+

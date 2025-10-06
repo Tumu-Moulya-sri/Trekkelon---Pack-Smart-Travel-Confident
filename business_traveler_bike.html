@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trekkelon - Business Traveler (Bike)</title>
+    <link rel="stylesheet" href="business_traveler.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        Business Traveler - Bike
+    </div>
+
+    <h1 id="tag">Here's a list of items which are essential for you!</h1>
+
+    <div class="container">
+
+        <div class="items_list">
+            <h1>Work Essentials</h1>
+            <form>
+                <label><input type="checkbox"> Laptop (carry in padded backpack)</label>
+                <label><input type="checkbox"> Mobile phone + Charger</label>
+                <label><input type="checkbox"> Important files/documents</label>
+                <label><input type="checkbox"> Pen & Notebook</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Riding Gear</h1>
+            <form>
+                <label><input type="checkbox"> Helmet (ISI certified)</label>
+                <label><input type="checkbox"> Riding jacket / gloves</label>
+                <label><input type="checkbox"> Knee & elbow guards</label>
+                <label><input type="checkbox"> Comfortable shoes</label>
+            </form>
+        </div>
+
+        <div class="items_list">
+            <h1>Travel Essentials</h1>
+            <form>
+                <label><input type="checkbox"> ID proof</label>
+                <label><input type="checkbox"> Wallet (cash + cards)</label>
+                <label><input type="checkbox"> Water bottle</label>
+                <label><input type="checkbox"> Snacks / energy bars</label>
+                <label><input type="checkbox"> First aid kit</label>
+            </form>
+        </div>
+
+        <div id="tips">
+            <h1>Pro Tips!!</h1><br>
+            <p>Pack laptop and files in waterproof backpack.</p><br>
+            <p>Wear formal clothes inside riding gear to save time.</p><br>
+            <p>Start early to avoid traffic and delays.</p><br>
+            <p>Keep raincoat if traveling in rainy season.</p><br>
+            <p>Take short breaks to stay fresh for meetings.</p><br>
+        </div>
+    </div>
+
+    <div class="items_list" id="customListContainer">
+    <h1>Your Custom List</h1>
+    <form id="customForm">
+        <input type="text" id="customInput" placeholder="Add your own item" required>
+        <button type="submit">Add Item</button>
+    </form>
+    <ul id="customList"></ul>
+</div>
+
+<script>
+        const form = document.getElementById("customForm");
+        const input = document.getElementById("customInput");
+        const list = document.getElementById("customList");
+
+        window.onload = function() {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved.forEach(item => addItem(item));
+        };
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const value = input.value.trim();
+            if (value !== "") {
+                addItem(value);
+                saveItem(value);
+                input.value = "";
+            }
+        });
+
+        function addItem(text) {
+            let li = document.createElement("li");
+
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.name = "custom";
+            checkbox.value = text;
+
+            let label = document.createElement("label");
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(" " + text));
+
+            let delBtn = document.createElement("span");
+            delBtn.textContent = "X";
+            delBtn.style.cursor = "pointer";
+            delBtn.style.marginLeft = "10px";
+            delBtn.style.color = "red";
+            delBtn.addEventListener("click", function() {
+                list.removeChild(li);
+                removeItem(text);
+            });
+
+            li.appendChild(label);
+            li.appendChild(delBtn);
+
+            
+            li.style.animationDelay = "0.5s"; 
+            list.appendChild(li);
+        }
+
+        function saveItem(text) {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved.push(text);
+            localStorage.setItem("customItems", JSON.stringify(saved));
+        }
+
+        function removeItem(text) {
+            let saved = JSON.parse(localStorage.getItem("customItems")) || [];
+            saved = saved.filter(item => item !== text);
+            localStorage.setItem("customItems", JSON.stringify(saved));
+        }
+    </script>
+</body>
+</html>
