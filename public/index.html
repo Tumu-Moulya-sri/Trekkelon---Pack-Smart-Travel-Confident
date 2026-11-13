@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trekkelon: Pack Smart. Travel Confident.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="#"><span class="logo"><img src="logo.png" alt="Trekkelon"></span><b>Trekkelon</b><small>Pack smart. Travel confident.</small></a>
+    <button id="tripsBtn" class="ghost" type="button">My trips</button>
+  </header>
+  <main id="app"></main>
+  <dialog id="tripsDlg"><div class="dlg-head"><h2>My saved trips</h2><button class="ghost" id="closeTrips" type="button">Close</button></div><div id="tripsList"></div></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

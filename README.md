@@ -1,41 +1,33 @@
-# Trekkelon---Pack-Smart-Travel-Confident
-Trekkelon is a website designed to help travelers efficiently organize their essentials, ensuring a smooth and stress-free journey. It adapts to different traveler types, transport modes, and personal preferences.
+# Trekkelon 2.0: Pack Smart. Travel Confident.
 
-Traveler Types
-- Solo travelers
-- Female solo travelers (with additional safety features)
-- Families
-- Business travelers
-- Last-minute travelers
+New feature: **Bag Guard**. Pack virtual bags (cabin, check-in, daypack, panniers...) and Trekkelon checks them
+against the weight limits and rules of your transport mode, then plays an X-ray scan and gives a Gate-Ready Score.
 
-🚌 Modes of Transport
-- Bus
-- Bike
-- Flight
-- Train
+## Run it
+1. Install Node.js 18+ from nodejs.org
+2. In a terminal: `cd trekkelon`
+3. `npm install`
+4. `npm start`
+5. Open http://localhost:3000
 
-Trekkelon dynamically adjusts the checklist based on the selected traveler type and transport mode, making packing context-aware and personalized.
+## Folder map
+- `server.js`        Express server, rules engine (`scan()`), saved-trips API
+- `data/rules.js`    ALL items, bag limits and rules. Edit this to change behaviour, no frontend change needed
+- `data/trips.json`  Saved trips (created automatically)
+- `public/`          Frontend: `index.html`, `style.css`, `app.js`, `logo.png`
 
-✨ Key Features
+## API
+- `GET  /api/config`                      traveler types, transport modes, bags
+- `GET  /api/items?persona=&mode=`        checklist for that traveler + transport
+- `POST /api/scan`                        body: persona, mode, bags, custom -> score, flags, missing essentials
+- `GET/POST /api/trips`, `DELETE /api/trips/:id`   saved trips per browser
 
-- Interactive Animations: Smooth fade-ins, slide-ups, and hover effects for a modern and engaging experience.
-- Custom Checklist: Users can add, mark, and remove items dynamically; all data is saved in-browser.
-- Emergency Card Generator: Special feature for female solo travelers to create a printable emergency card with essential personal and contact information.
-- Pro Tips Section: Practical advice to travel safely, comfortably, and efficiently.
-- User-Friendly Interface: Organized sections, clear headings, and smooth transitions for an intuitive experience.
+## Demo script (about 2 minutes)
+1. Choose Female Solo Traveler, then Flight.
+2. Tap Pepper spray, Razor, Water bottle and Power bank into the Cabin bag. Put the Phone in Check-in.
+3. Notice the live red/amber flags on the items, then press **Scan my bags**.
+4. Read out the report, fix the bags, scan again, then Save trip.
 
-💻 Technology Stack
-
-- HTML: Structured layout with forms, checklists, and headings.
-- CSS: Styling, responsive design, and interactive animations.
-- JavaScript: Dynamic features like custom checklist management, local storage persistence, and emergency card generation.
-
-🚀 User Experience
-- Select your traveler type and mode of transport.
-- View your personalized checklist.
-- Add custom items as needed and mark them as packed.
-- Female solo travelers can generate an emergency card for added safety.
-- Pro Tips help you prepare efficiently and avoid last-minute stress.
-
-✅ Outcome: 
-Trekkelon provides a complete, interactive, and personalized travel companion, combining organization, safety, and convenience for every type of traveler.
+## Important
+Weight limits and restrictions are typical values and can differ by airline, railway zone and operator.
+Verify them against official sources (airline, BCAS, IRCTC) before presenting them as facts.
